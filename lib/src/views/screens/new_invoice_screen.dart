@@ -1,4 +1,4 @@
-import 'package:factureo/src/views/core/routing/widgets/title.dart';
+import 'package:factureo/src/core/routing/widgets/title.dart';
 import 'package:factureo/src/views/widgets/invoice_form.dart';
 import 'package:flutter/material.dart';
 

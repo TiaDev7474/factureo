@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:factureo/src/views/data/model/article_model.dart';
+import 'package:factureo/src/data/model/article_model.dart';
 
 class InvoiceModel extends Equatable {
   final String clientName;

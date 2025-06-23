@@ -1,4 +1,4 @@
-import 'package:factureo/src/views/data/model/article_model.dart';
+import 'package:factureo/src/data/model/article_model.dart';
 import 'package:flutter/material.dart';
 
 class ArticleItem extends StatelessWidget {

@@ -1,5 +1,5 @@
-import 'package:factureo/src/views/data/model/article_model.dart';
-import 'package:factureo/src/views/data/model/invoice_model.dart';
+import 'package:factureo/src/data/model/article_model.dart';
+import 'package:factureo/src/data/model/invoice_model.dart';
 import 'package:factureo/src/views/widgets/article_item.dart';
 import 'package:factureo/src/views/widgets/invoice_detail_form.dart';
 import 'package:factureo/src/views/widgets/new_article_form.dart';

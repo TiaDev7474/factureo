@@ -1,5 +1,5 @@
-import 'package:factureo/src/views/core/utils/input_validation.dart';
-import 'package:factureo/src/views/data/model/article_model.dart';
+import 'package:factureo/src/core/utils/input_validation.dart';
+import 'package:factureo/src/data/model/article_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

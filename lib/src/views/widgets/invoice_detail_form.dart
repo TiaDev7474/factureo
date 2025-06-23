@@ -1,4 +1,4 @@
-import 'package:factureo/src/views/core/routing/widgets/date_input_picker.dart';
+import 'package:factureo/src/core/routing/widgets/date_input_picker.dart';
 import 'package:flutter/material.dart';
 
 class InvoiceDetailForm extends StatefulWidget {

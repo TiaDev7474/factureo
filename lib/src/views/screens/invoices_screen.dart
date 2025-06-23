@@ -1,4 +1,4 @@
-import 'package:factureo/src/views/core/routing/router.dart';
+import 'package:factureo/src/core/routing/router.dart';
 import 'package:flutter/material.dart';
 
 class InvoicesScreen extends StatelessWidget {
