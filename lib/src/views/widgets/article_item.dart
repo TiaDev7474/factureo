@@ -1,66 +1,80 @@
+import 'package:factureo/src/core/utils/format.dart';
 import 'package:factureo/src/data/model/article_model.dart';
 import 'package:flutter/material.dart';
 
 class ArticleItem extends StatelessWidget {
-  const ArticleItem({super.key, required this.article});
+  const ArticleItem({super.key, required this.article, required this.onDelete});
+
   final ArticleModel article;
+  final VoidCallback onDelete;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        title: Text(
+          article.description,
+          style: theme.textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        subtitle: Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: Row(
+            children: [
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.primaryContainer,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 4,
+                    horizontal: 8,
+                  ),
                   child: Text(
-                    article.description,
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
+                    'Qté: ${article.quantity}',
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: theme.colorScheme.onPrimaryContainer,
                     ),
                   ),
                 ),
-                Chip(
-                  label: Text('Qté: ${article.quantity}'),
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                '${formatToReadableCurrencyValue(article.unitPrice, symbol: "€")} / unité',
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurface.withAlpha(200),
                 ),
+              ),
+            ],
+          ),
+        ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  formatToReadableCurrencyValue(article.totalHT, symbol: "€"),
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: theme.colorScheme.primary,
+                  ),
+                ),
+                Text('Total HT', style: theme.textTheme.labelSmall),
               ],
             ),
-            const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Prix unitaire', style: theme.textTheme.labelSmall),
-                    Text(
-                      '€${article.unitPrice.toStringAsFixed(2)}',
-                      style: theme.textTheme.bodyMedium,
-                    ),
-                  ],
-                ),
-
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text('Total HT', style: theme.textTheme.labelSmall),
-                    Text(
-                      '€${article.totalHT.toStringAsFixed(2)}',
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: theme.colorScheme.primary,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+            const SizedBox(width: 8),
+            IconButton(
+              onPressed: onDelete,
+              icon: Icon(Icons.delete_outline, color: theme.colorScheme.error),
+              iconSize: 20,
             ),
           ],
         ),

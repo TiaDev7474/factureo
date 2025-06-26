@@ -1,3 +1,4 @@
+import 'package:factureo/src/core/utils/format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,13 @@ class DateInputDatePickerField extends StatefulWidget {
 }
 
 class _DateInputDatePickerFieldState extends State<DateInputDatePickerField> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    widget.dateController.text = formatDate(DateTime.now());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -36,11 +44,11 @@ class _DateInputDatePickerFieldState extends State<DateInputDatePickerField> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  TextButton(
+                  IconButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: const Text('Appliquer'),
+                    icon: Icon(Icons.cancel),
                   ),
                   Expanded(
                     child: CupertinoDatePicker(
@@ -48,7 +56,9 @@ class _DateInputDatePickerFieldState extends State<DateInputDatePickerField> {
                       initialDateTime: DateTime.now(),
                       onDateTimeChanged: (date) {
                         setState(() {
-                          widget.dateController.text = date.toIso8601String();
+                          widget.dateController.text = formatDate(
+                            date.toLocal(),
+                          );
                         });
                       },
                     ),
@@ -62,12 +72,8 @@ class _DateInputDatePickerFieldState extends State<DateInputDatePickerField> {
       controller: widget.dateController,
       decoration: InputDecoration(
         prefixIcon: Icon(Icons.date_range_rounded),
+        suffixIcon: Icon(Icons.expand_more),
         labelText: widget.label,
-        filled: true,
-        enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
-        ),
       ),
       readOnly: true,
     );

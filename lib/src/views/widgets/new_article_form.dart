@@ -1,3 +1,4 @@
+import 'package:factureo/src/core/utils/format.dart';
 import 'package:factureo/src/core/utils/input_validation.dart';
 import 'package:factureo/src/data/model/article_model.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class NewArticleButton extends StatelessWidget {
     return ElevatedButton.icon(
       onPressed: () {
         showModalBottomSheet(
+          useSafeArea: true,
           enableDrag: true,
           context: context,
           isScrollControlled: true,
@@ -89,14 +91,14 @@ class _NewArticleFormState extends State<NewArticleForm> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
       ),
       child: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(22.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Nouvel Article',
-              style: theme.textTheme.titleSmall,
+              style: theme.textTheme.titleMedium,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
@@ -105,20 +107,10 @@ class _NewArticleFormState extends State<NewArticleForm> {
               child: Column(
                 children: [
                   TextFormField(
-                    maxLines: 2,
                     controller: _descriptionController,
                     decoration: InputDecoration(
                       labelText: 'Description',
                       hintText: 'Entrez la description de l\'article',
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: theme.colorScheme.primary,
-                        ),
-                      ),
                     ),
                     textCapitalization: TextCapitalization.sentences,
                   ),
@@ -126,20 +118,10 @@ class _NewArticleFormState extends State<NewArticleForm> {
                   Row(
                     children: [
                       Expanded(
-                        flex: 1,
                         child: TextFormField(
                           controller: _quantityController,
                           decoration: InputDecoration(
                             labelText: 'Quantité',
-                            filled: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: theme.colorScheme.primary,
-                              ),
-                            ),
                             prefixIcon: Icon(Icons.numbers),
                           ),
                           keyboardType: TextInputType.number,
@@ -156,20 +138,10 @@ class _NewArticleFormState extends State<NewArticleForm> {
                       ),
                       const SizedBox(width: 12),
                       Expanded(
-                        flex: 2,
                         child: TextFormField(
                           controller: _unitPriceController,
                           decoration: InputDecoration(
                             labelText: 'Prix unitaire HT',
-                            filled: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: theme.colorScheme.primary,
-                              ),
-                            ),
                             suffixText: '€',
                           ),
                           keyboardType: const TextInputType.numberWithOptions(
@@ -192,15 +164,17 @@ class _NewArticleFormState extends State<NewArticleForm> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
+                      Text(
                         'Montant total HT:',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                       Text(
-                        '${_totalHT.toStringAsFixed(2)} €',
+                        formatToReadableCurrencyValue(_totalHT, symbol: "€"),
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
