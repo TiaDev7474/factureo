@@ -6,30 +6,30 @@ Application mobile développée avec Flutter permettant de créer une facture pe
 ## Fonctionnalités
 ### 1. Écran de création de facture
 
-- [ ] Formulaire avec :
-    - [ ] Nom du client
-    - [ ] Email du client
-    - [ ] Date de facture (sélection manuelle ou automatique)
-    - [ ] Liste d’articles dynamique
-- [ ] Calcul automatique des totaux :
-    - [ ] Total HT
-    - [ ] TVA (20 %)
-    - [ ] Total TTC
+- [x] Formulaire avec :
+    - [x] Nom du client
+    - [x] Email du client
+    - [x] Date de facture (sélection manuelle ou automatique)
+    - [x] Liste d’articles dynamique
+- [x] Calcul automatique des totaux :
+    - [x] Total HT
+    - [x] TVA (20 %)
+    - [x] Total TTC
 
 ### 2. Gestion dynamique des articles
 
-- [ ] Ajout d’un nouvel article
-- [ ] Suppression d’un article
-- [ ] Mise à jour en temps réel des totaux
+- [x] Ajout d’un nouvel article
+- [x] Suppression d’un article
+- [x] Mise à jour en temps réel des totaux
 
 ### 3. Aperçu de la facture
 
-- [ ] Affichage structuré reprenant :
-    - [ ] Les informations du client
-    - [ ] La date
-    - [ ] Un tableau détaillé des articles
-    - [ ] Les totaux HT, TVA et TTC
-- [ ] Design inspiré d’une facture réelle
+- [x] Affichage structuré reprenant :
+    - [x] Les informations du client
+    - [x] La date
+    - [x] Un tableau détaillé des articles
+    - [x] Les totaux HT, TVA et TTC
+- [x] Design inspiré d’une facture réelle
 
 ## Choix techniques
 - State Management : utilisation de `setState` pour la gestion simple de l’état local.
