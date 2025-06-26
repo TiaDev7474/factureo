@@ -9,8 +9,9 @@ class InvoicePreviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: AppBar(title: const Text('Aperçu')),
+      appBar: AppBar(title: Text('Aperçu', style: textTheme.titleLarge)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(8),
         child: Card(
@@ -20,11 +21,11 @@ class InvoicePreviewScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildHeader(),
+                _buildHeader(context),
                 const SizedBox(height: 32),
                 _buildClientInfo(context),
                 const SizedBox(height: 32),
-                _buildItemsTable(),
+                _buildItemsTable(context),
                 const SizedBox(height: 24),
                 _buildTotalsSummary(context),
               ],
@@ -35,29 +36,27 @@ class InvoicePreviewScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final color = Theme.of(context).colorScheme.onSurfaceVariant;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
+        Text(
           'FACTURE',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
               'Date d\'émission',
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.grey[600],
-                fontWeight: FontWeight.w500,
-              ),
+              style: textTheme.labelSmall?.copyWith(color: color),
             ),
             const SizedBox(height: 4),
             Text(
               formatDate(invoice.invoiceDate),
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
             ),
           ],
         ),
@@ -66,34 +65,28 @@ class InvoicePreviewScreen extends StatelessWidget {
   }
 
   Widget _buildClientInfo(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final primary = Theme.of(context).colorScheme.primary;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Facturé à:',
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-            color: Theme.of(context).colorScheme.primary,
+          style: textTheme.labelLarge?.copyWith(
+            color: primary,
             letterSpacing: 0.3,
           ),
         ),
         const SizedBox(height: 12),
         Row(
           children: [
-            Icon(Icons.person, size: 32),
+            Icon(Icons.person, size: 32, color: primary),
             const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  invoice.clientName,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                Text(
-                  invoice.clientEmail,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
+                Text(invoice.clientName, style: textTheme.titleMedium),
+                Text(invoice.clientEmail, style: textTheme.bodyMedium),
               ],
             ),
           ],
@@ -102,7 +95,7 @@ class InvoicePreviewScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildItemsTable() {
+  Widget _buildItemsTable(BuildContext context) {
     return Table(
       columnWidths: const {
         0: FlexColumnWidth(2.5),
@@ -110,64 +103,62 @@ class InvoicePreviewScreen extends StatelessWidget {
         2: FlexColumnWidth(2),
         3: FlexColumnWidth(2),
       },
-      children: [_buildTableHeader(), ...invoice.items.map(_buildTableRow)],
+      children: [
+        _buildTableHeader(context),
+        ...invoice.items.map((e) => _buildTableRow(context, e)),
+      ],
     );
   }
 
-  TableRow _buildTableHeader() {
-    return const TableRow(
+  TableRow _buildTableHeader(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final headerStyle = textTheme.labelLarge?.copyWith(
+      fontWeight: FontWeight.bold,
+    );
+    return TableRow(
       children: [
         Padding(
-          padding: EdgeInsets.all(12),
-          child: Text(
-            'Description',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
+          padding: const EdgeInsets.all(12),
+          child: Text('Description', style: headerStyle),
         ),
         Padding(
-          padding: EdgeInsets.all(12),
-          child: Text(
-            'Qté',
-            style: TextStyle(fontWeight: FontWeight.bold),
-            textAlign: TextAlign.center,
-          ),
+          padding: const EdgeInsets.all(12),
+          child: Text('Qté', style: headerStyle, textAlign: TextAlign.center),
         ),
         Padding(
-          padding: EdgeInsets.all(12),
-          child: Text(
-            'Prix',
-            style: TextStyle(fontWeight: FontWeight.bold),
-            textAlign: TextAlign.right,
-          ),
+          padding: const EdgeInsets.all(12),
+          child: Text('Prix', style: headerStyle, textAlign: TextAlign.right),
         ),
         Padding(
-          padding: EdgeInsets.all(12),
-          child: Text(
-            'Total',
-            style: TextStyle(fontWeight: FontWeight.bold),
-            textAlign: TextAlign.right,
-          ),
+          padding: const EdgeInsets.all(12),
+          child: Text('Total', style: headerStyle, textAlign: TextAlign.right),
         ),
       ],
     );
   }
 
-  TableRow _buildTableRow(ArticleModel item) {
+  TableRow _buildTableRow(BuildContext context, ArticleModel item) {
+    final textTheme = Theme.of(context).textTheme;
     return TableRow(
       children: [
         Padding(
           padding: const EdgeInsets.all(12),
-          child: Text(item.description),
+          child: Text(item.description, style: textTheme.bodyMedium),
         ),
         Padding(
           padding: const EdgeInsets.all(12),
-          child: Text(item.quantity.toString(), textAlign: TextAlign.center),
+          child: Text(
+            item.quantity.toString(),
+            textAlign: TextAlign.center,
+            style: textTheme.bodyMedium,
+          ),
         ),
         Padding(
           padding: const EdgeInsets.all(12),
           child: Text(
             '${item.unitPrice.toStringAsFixed(2)} €',
             textAlign: TextAlign.right,
+            style: textTheme.bodyMedium,
           ),
         ),
         Padding(
@@ -175,7 +166,7 @@ class InvoicePreviewScreen extends StatelessWidget {
           child: Text(
             '${item.totalHT.toStringAsFixed(2)} €',
             textAlign: TextAlign.right,
-            style: const TextStyle(fontWeight: FontWeight.w500),
+            style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
           ),
         ),
       ],
@@ -186,39 +177,49 @@ class InvoicePreviewScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildSubtotalRow(),
+        _buildSubtotalRow(context),
         const SizedBox(height: 8),
-        _buildTaxRow(),
+        _buildTaxRow(context),
         const SizedBox(height: 12),
         _buildTotalRow(context),
       ],
     );
   }
 
-  Widget _buildSubtotalRow() {
+  Widget _buildSubtotalRow(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text('Sous-total HT:'),
-        Text(formatToReadableCurrencyValue(invoice.totalHT, symbol: "€")),
+        Text('Sous-total HT:', style: textTheme.bodyMedium),
+        Text(
+          formatToReadableCurrencyValue(invoice.totalHT, symbol: "€"),
+          style: textTheme.bodyMedium,
+        ),
       ],
     );
   }
 
-  Widget _buildTaxRow() {
+  Widget _buildTaxRow(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text('TVA (20%):'),
-        Text(formatToReadableCurrencyValue(invoice.tva, symbol: "€")),
+        Text('TVA (20%):', style: textTheme.bodyMedium),
+        Text(
+          formatToReadableCurrencyValue(invoice.tva, symbol: "€"),
+          style: textTheme.bodyMedium,
+        ),
       ],
     );
   }
 
   Widget _buildTotalRow(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primaryContainer,
+        color: colorScheme.primaryContainer,
         borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(16),
           bottomRight: Radius.circular(16),
@@ -231,20 +232,16 @@ class InvoicePreviewScreen extends StatelessWidget {
           children: [
             Text(
               'TOTAL TTC:',
-              style: TextStyle(
+              style: textTheme.labelLarge?.copyWith(
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
-                fontSize: 14,
-                letterSpacing: 0.5,
+                color: colorScheme.onPrimaryContainer,
               ),
             ),
             Text(
               formatToReadableCurrencyValue(invoice.totalTTC, symbol: "€"),
-              style: TextStyle(
+              style: textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
-                letterSpacing: 0.3,
+                color: colorScheme.onPrimaryContainer,
               ),
             ),
           ],
