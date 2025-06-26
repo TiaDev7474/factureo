@@ -44,13 +44,13 @@ Application mobile développée avec Flutter permettant de créer une facture pe
 ![Aucun article - sombre](assets/images/empty_article.jpg)
 
 #### 2. Ajout d’un article
-![Ajout d’article - sombre](assets/images/add_arcticle.jpg)
+![Ajout d’article - sombre](assets/images/add_article.jpg)
 
 #### 3. Facture avec articles
 ![Facture avec articles - sombre](assets/images/invoice.jpg)
 
 #### 4. Aperçu de la facture
-![Aperçu facture - sombre](assets/images/preview.jpg)
+![Aperçu facture - sombre](assets/images/preview_dark.jpg)
 
 ---
 
@@ -63,7 +63,7 @@ Application mobile développée avec Flutter permettant de créer une facture pe
 ![Ajout d’article - clair](assets/images/add_article_light.jpg)
 
 #### 3. Facture avec articles
-![Facture avec articles - clair](assets/images/invoice_with_article_light.jpg)
+![Facture avec articles - clair](assets/images/invoice_with_articles.jpg)
 
 #### 4. Aperçu de la facture
 ![Aperçu facture - clair](assets/images/preview_light.jpg)
