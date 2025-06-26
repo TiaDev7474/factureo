@@ -41,32 +41,33 @@ Application mobile développée avec Flutter permettant de créer une facture pe
 ### Thème sombre
 
 #### 1. Aucun article ajouté
-![Aucun article - sombre](assets/images/empty_article.jpg)
+<img src="assets/images/empty_article.jpg" alt="Aucun article - sombre" style="max-width: 100%; width: 500px;" />
 
 #### 2. Ajout d’un article
-![Ajout d’article - sombre](assets/images/add_article.jpg)
+<img src="assets/images/add_article.jpg" alt="Ajout d’article - sombre" style="max-width: 100%; width: 500px;" />
 
 #### 3. Facture avec articles
-![Facture avec articles - sombre](assets/images/invoice.jpg)
+<img src="assets/images/invoice.jpg" alt="Facture avec articles - sombre" style="max-width: 100%; width: 500px;" />
 
 #### 4. Aperçu de la facture
-![Aperçu facture - sombre](assets/images/preview_dark.jpg)
+<img src="assets/images/preview_dark.jpg" alt="Aperçu facture - sombre" style="max-width: 100%; width: 500px;" />
 
 ---
 
 ### Thème clair
 
 #### 1. Aucun article ajouté
-![Aucun article - clair](assets/images/empty_article_light.jpg)
+<img src="assets/images/empty_article_light.jpg" alt="Aucun article - clair" style="max-width: 100%; width: 500px;" />
 
 #### 2. Ajout d’un article
-![Ajout d’article - clair](assets/images/add_article_light.jpg)
+<img src="assets/images/add_article_light.jpg" alt="Ajout d’article - clair" style="max-width: 100%; width: 500px;" />
 
 #### 3. Facture avec articles
-![Facture avec articles - clair](assets/images/invoice_with_articles.jpg)
+<img src="assets/images/invoice_with_articles.jpg" alt="Facture avec articles - clair" style="max-width: 100%; width: 500px;" />
 
 #### 4. Aperçu de la facture
-![Aperçu facture - clair](assets/images/preview_light.jpg)
+<img src="assets/images/preview_light.jpg" alt="Aperçu facture - clair" style="max-width: 100%; width: 500px;" />
+
 
 ## Licence
 
