@@ -38,6 +38,7 @@ class _InvoiceDetailFormState extends State<InvoiceDetailForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: invoiceDetailFormKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

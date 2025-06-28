@@ -21,9 +21,6 @@ class _DateInputDatePickerFieldState extends State<DateInputDatePickerField> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      widget.dateController.text = formatDate(DateTime.now());
-    });
   }
 
   @override
