@@ -5,5 +5,5 @@ String formatToReadableCurrencyValue(double value, {required String symbol}) {
 }
 
 String formatDate(DateTime date) {
-  return DateFormat.yMMMEd('fr_FR').format(date);
+  return DateFormat('yyyy-MM-dd').format(date);
 }
